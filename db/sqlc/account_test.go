@@ -3,12 +3,13 @@ package db
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 	"github.com/ullas-jain/simplebank/util"
 )
 
-func TestCreateAccount(t *testing.T) {
+func createRandomAccount(t *testing.T) Account {
 	arg := CreateAccountParams{
 		Owner: util.RandomOwner(),
 		Balance: util.RandomMoney(),
@@ -23,5 +24,23 @@ func TestCreateAccount(t *testing.T) {
 	require.Equal(t, arg.Currency, account.Currency)
 	require.NotZero(t, account.ID)
 	require.NotZero(t, account.CreatedAt)
-	
+
+	return account
+}
+
+func TestCreateAccount(t *testing.T) {
+	createRandomAccount(t)
+}
+
+func TestGetAccount(t *testing.T) {
+	createdAccount := createRandomAccount(t)
+	queriedAccount, err := testQueries.GetAccount(context.Background(), createdAccount.ID)
+	require.NoError(t, err)
+	require.NotEmpty(t, queriedAccount)
+
+	require.Equal(t, createdAccount.ID, queriedAccount.ID)
+	require.Equal(t, createdAccount.Owner, queriedAccount.Owner)
+	require.Equal(t, createdAccount.Balance, queriedAccount.Balance)
+	require.Equal(t, createdAccount.Currency, queriedAccount.Currency)
+	require.WithinDuration(t, createdAccount.CreatedAt, queriedAccount.CreatedAt, time.Second)
 }
