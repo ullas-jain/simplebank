@@ -1,6 +1,8 @@
 module github.com/ullas-jain/simplebank
 
-go 1.20
+go 1.21
+
+toolchain go1.21.3
 
 require (
 	github.com/lib/pq v1.10.9
@@ -51,6 +53,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/rogpeppe/go-internal v1.11.0 // indirect
 	github.com/spf13/viper v1.18.2
+	github.com/techschool/simplebank v0.0.0-20231029084543-9544012aa580
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	golang.org/x/arch v0.7.0 // indirect
