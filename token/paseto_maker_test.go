@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"github.com/techschool/simplebank/util"
+	"github.com/ullas-jain/simplebank/util"
 )
 
 func TestPasetoMaker(t *testing.T) {
